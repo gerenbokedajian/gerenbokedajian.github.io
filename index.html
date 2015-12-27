@@ -9,7 +9,7 @@
   <meta name="author" content="个人博客">
 
   
-  <meta name="description" content="小引 Octopress是利用Jekyll博客引擎开发的一个博客系统，生成的静态页面能够很好的在github page上展现。号称是hacker专属的一个博客系统(A blogging framework for hackers.) 1、安装Ruby Octopress需要Ruby环境，RVM( &hellip;">
+  <meta name="description" content="First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/27/octopress-setup/">Octopress Setup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-27T14:48:40+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:48 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the basics of Git. If that sounds daunting, Octopress probably isn&rsquo;t for you.</p>
+
+<h2>Before You Begin</h2>
+
+<ul>
+<li>Install Git.</li>
+<li>Install Ruby 1.9.3 or greater using either rbenv or RVM.</li>
+<li>Install one of the ExecJS supported JavaScript runtimes.</li>
+</ul>
+
+
+<p>If <code>ruby --version</code> doesn&rsquo;t say you&rsquo;re using Ruby at least 1.9.3, revisit your rbenv or RVM installation.</p>
+
+<h2>Setup Octopress</h2>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+</code></pre>
+
+<p>Next, install dependencies.</p>
+
+<pre><code>gem install bundler
+rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+bundle install
+</code></pre>
+
+<p>Install the default Octopress theme.</p>
+
+<pre><code>rake install
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -208,6 +266,10 @@ $ rake deploy
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/12/27/octopress-setup/">Octopress Setup</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/12/27/li-yong-octopressda-da-jian-ge-ren-bo-ke/">利用Octopress搭建一个Github博客博客</a>

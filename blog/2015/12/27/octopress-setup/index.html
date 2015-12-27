@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Octopress - 个人博客搭建</title>
+  <title>Octopress Setup - 个人博客搭建</title>
   <meta name="author" content="个人博客">
 
   
-  <meta name="description" content="Category: octopress">
+  <meta name="description" content="First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gerenbokedajian.github.io/blog/categories/octopress/">
+  <link rel="canonical" href="http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="个人博客搭建" type="application/atom+xml">
@@ -65,49 +65,99 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Octopress</h1>
+    
+      <h1 class="entry-title">Octopress Setup</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-27T14:48:40+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:48 pm</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the basics of Git. If that sounds daunting, Octopress probably isn&rsquo;t for you.</p>
 
-  
-  <h2>2015</h2>
+<h2>Before You Begin</h2>
 
-<article>
-  
-<h1><a href="/blog/2015/12/27/octopress-setup/">Octopress Setup</a></h1>
-<time datetime="2015-12-27T14:48:40+08:00" pubdate><span class='month'>Dec</span> <span class='day'>27</span> <span class='year'>2015</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/octopress/'>octopress</a></span>
-</footer>
+<ul>
+<li>Install Git.</li>
+<li>Install Ruby 1.9.3 or greater using either rbenv or RVM.</li>
+<li>Install one of the ExecJS supported JavaScript runtimes.</li>
+</ul>
 
 
-</article>
+<p>If <code>ruby --version</code> doesn&rsquo;t say you&rsquo;re using Ruby at least 1.9.3, revisit your rbenv or RVM installation.</p>
 
+<h2>Setup Octopress</h2>
 
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2015/12/27/li-yong-octopressda-da-jian-ge-ren-bo-ke/">利用Octopress搭建一个Github博客博客</a></h1>
-<time datetime="2015-12-27T12:35:27+08:00" pubdate><span class='month'>Dec</span> <span class='day'>27</span> <span class='year'>2015</span></time>
+<p>Next, install dependencies.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/octopress/'>octopress</a></span>
-</footer>
+<pre><code>gem install bundler
+rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+bundle install
+</code></pre>
 
+<p>Install the default Octopress theme.</p>
 
-</article>
-
+<pre><code>rake install
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">个人博客</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-12-27T14:48:40+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:48 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup/" data-via="" data-counturl="http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/12/27/li-yong-octopressda-da-jian-ge-ren-bo-ke/" title="Previous Post: 利用Octopress搭建一个Github博客博客">&laquo; 利用Octopress搭建一个Github博客博客</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

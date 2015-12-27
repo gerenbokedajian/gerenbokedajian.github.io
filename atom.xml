@@ -4,7 +4,7 @@
   <title><![CDATA[个人博客搭建]]></title>
   <link href="http://gerenbokedajian.github.io/atom.xml" rel="self"/>
   <link href="http://gerenbokedajian.github.io/"/>
-  <updated>2015-12-27T13:45:05+08:00</updated>
+  <updated>2015-12-27T14:50:16+08:00</updated>
   <id>http://gerenbokedajian.github.io/</id>
   <author>
     <name><![CDATA[个人博客]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Setup]]></title>
+    <link href="http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup/"/>
+    <updated>2015-12-27T14:48:40+08:00</updated>
+    <id>http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup</id>
+    <content type="html"><![CDATA[<p>First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the basics of Git. If that sounds daunting, Octopress probably isn&rsquo;t for you.</p>
+
+<h2>Before You Begin</h2>
+
+<ul>
+<li>Install Git.</li>
+<li>Install Ruby 1.9.3 or greater using either rbenv or RVM.</li>
+<li>Install one of the ExecJS supported JavaScript runtimes.</li>
+</ul>
+
+
+<p>If <code>ruby --version</code> doesn&rsquo;t say you&rsquo;re using Ruby at least 1.9.3, revisit your rbenv or RVM installation.</p>
+
+<h2>Setup Octopress</h2>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+</code></pre>
+
+<p>Next, install dependencies.</p>
+
+<pre><code>gem install bundler
+rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+bundle install
+</code></pre>
+
+<p>Install the default Octopress theme.</p>
+
+<pre><code>rake install
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[利用Octopress搭建一个Github博客博客]]></title>
