@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[个人博客搭建]]></title>
-  <link href="http://gerenbokedajian.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Octopress | 个人博客搭建]]></title>
+  <link href="http://gerenbokedajian.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://gerenbokedajian.github.io/"/>
   <updated>2015-12-27T13:45:05+08:00</updated>
   <id>http://gerenbokedajian.github.io/</id>
