@@ -4,7 +4,7 @@
   <title><![CDATA[个人博客搭建]]></title>
   <link href="http://gerenbokedajian.github.io/atom.xml" rel="self"/>
   <link href="http://gerenbokedajian.github.io/"/>
-  <updated>2015-12-27T14:50:16+08:00</updated>
+  <updated>2015-12-28T00:22:53+08:00</updated>
   <id>http://gerenbokedajian.github.io/</id>
   <author>
     <name><![CDATA[个人博客]]></name>
@@ -14,11 +14,101 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Configuring Octopress]]></title>
+    <link href="http://gerenbokedajian.github.io/blog/2015/12/27/configuring-octopress/"/>
+    <updated>2015-12-27T15:08:22+08:00</updated>
+    <id>http://gerenbokedajian.github.io/blog/2015/12/27/configuring-octopress</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve tried to keep configuring Octopress fairly simple and you&rsquo;ll probably only ever change the <code>Rakefile</code> and the <code>_config.yml</code>. Here&rsquo;s a list of files for configuring Octopress.</p>
+
+<pre><code>_config.yml       # Main config (Jekyll's settings)
+    Rakefile          # Configs for deployment
+    config.rb         # Compass config
+    config.ru         # Rack config
+</code></pre>
+
+<p>Configurations in the <code>Rakefile</code> are mostly related to deployment and you probably won&rsquo;t have to touch them unless you&rsquo;re using rsync.</p>
+
+<!--more-->
+
+
+<h2>Blog Configuration</h2>
+
+<p>In the <code>_config.yml</code> there are three sections for configuring your Octopress Blog. Spoiler: You must change <code>url</code>, and you&rsquo;ll probably change title, subtitle and author and enable some 3rd party services.</p>
+
+<h3>Main Configs</h3>
+
+<pre><code>url:                # For rewriting urls for RSS, etc
+title:              # Used in the header and title tags
+subtitle:           # A description used in the header
+author:             # Your name, for RSS, Copyright, Metadata
+simple_search:      # Search engine for simple site search
+description:        # A default meta description for your site
+date_format:        # Format dates using Ruby's date strftime syntax
+subscribe_rss:      # Url for your blog's feed, defauts to /atom.xml
+subscribe_email:    # Url to subscribe by email (service required)
+category_feeds:     # Enable per category RSS feeds (defaults to false in 2.1)
+email:              # Email address for the RSS feed if you want it.
+</code></pre>
+
+<p>Note: If your site is a multi-author blog, you may want to set this config&rsquo;s author to the name of your company or project, and add author metadata to posts and pages to give proper attribution for those works.</p>
+
+<h3>Jekyll &amp; Plugins</h3>
+
+<p>These configurations are used by Jekyll and Plugins. If you&rsquo;re not familiar with Jekyll, you should probably have a look at the configuration docs which lists more options that aren&rsquo;t covered here.</p>
+
+<pre><code>root:               # Mapping for relative urls (default: /)
+permalink:          # Permalink structure for blog posts
+source:             # Directory for site source files
+destination:        # Directory for generated site files
+plugins:            # Directory for Jekyll plugins
+code_dir:           # Directory for code snippets (for include_code plugin)
+category_dir:       # Directory for generated blog category pages
+
+pygments:           # Toggle python pygments syntax highlighting
+paginate:           # Posts per page on the blog index
+pagination_dir:     # Directory base for pagination URLs eg. /blog/page/2/
+recent_posts:       # Number of recent posts to appear in the sidebar
+
+default_asides:     # Configure what shows up in the sidebar and in what order
+blog_index_asides:  # Optional sidebar config for blog index page
+post_asides:        # Optional sidebar config for post layout
+page_asides:        # Optional sidebar config for page layout
+</code></pre>
+
+<p>If you want to change the way permalinks are written for your blog posts, see Jekyll&rsquo;s permalink docs.  <br/>
+Note: Jekyll has a baseurl config which offers mock subdirectory publishing support by adding a redirect to Jekyll&rsquo;s WEBrick server. Please don&rsquo;t use this. If you want to publish your site to a subdirectory, (see Deploying Octopress to a Subdirectory).</p>
+
+<h2>3rd Party Settings</h2>
+
+<p>These third party integrations are already set up for you. Simply fill in the configurations and they&rsquo;ll be added to your site.</p>
+
+<ul>
+<li>Github - List your github repositories in the sidebar</li>
+<li>Twitter - Add a button for sharing of posts and pages on Twitter</li>
+<li>Google Plus One - Setup sharing for posts and pages on Google&rsquo;s plus one network.</li>
+<li>Pinboard - Share your recent Pinboard bookmarks in the sidebar.</li>
+<li>Delicious - Share your recent Delicious bookmarks in the sidebar.</li>
+<li>Disqus Comments - Add your disqus short name to enable disqus comments on your site.</li>
+<li>Google Analytics - Add your tracking id to enable Google Analytics tracking for your site.</li>
+<li>Facebook - Add a Facebook like button</li>
+</ul>
+
+
+<p>The Octopress layouts read these configurations and only include the javascript and html necessary for the enabled services.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Octopress Setup]]></title>
     <link href="http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup/"/>
     <updated>2015-12-27T14:48:40+08:00</updated>
     <id>http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup</id>
     <content type="html"><![CDATA[<p>First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the basics of Git. If that sounds daunting, Octopress probably isn&rsquo;t for you.</p>
+
+<!--more-->
+
+
+<p></p>
 
 <h2>Before You Begin</h2>
 

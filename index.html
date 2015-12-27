@@ -9,7 +9,7 @@
   <meta name="author" content="个人博客">
 
   
-  <meta name="description" content="First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the &hellip;">
+  <meta name="description" content="I&rsquo;ve tried to keep configuring Octopress fairly simple and you&rsquo;ll probably only ever change the Rakefile and the _config.yml. Here&rsquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +23,6 @@
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="个人博客搭建" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -68,6 +67,49 @@
   
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/27/configuring-octopress/">Configuring Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-27T15:08:22+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:08 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve tried to keep configuring Octopress fairly simple and you&rsquo;ll probably only ever change the <code>Rakefile</code> and the <code>_config.yml</code>. Here&rsquo;s a list of files for configuring Octopress.</p>
+
+<pre><code>_config.yml       # Main config (Jekyll's settings)
+    Rakefile          # Configs for deployment
+    config.rb         # Compass config
+    config.ru         # Rack config
+</code></pre>
+
+<p>Configurations in the <code>Rakefile</code> are mostly related to deployment and you probably won&rsquo;t have to touch them unless you&rsquo;re using rsync.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/12/27/configuring-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
     <article>
       
   <header>
@@ -90,36 +132,12 @@
 
   <div class="entry-content"><p>First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the basics of Git. If that sounds daunting, Octopress probably isn&rsquo;t for you.</p>
 
-<h2>Before You Begin</h2>
-
-<ul>
-<li>Install Git.</li>
-<li>Install Ruby 1.9.3 or greater using either rbenv or RVM.</li>
-<li>Install one of the ExecJS supported JavaScript runtimes.</li>
-</ul>
-
-
-<p>If <code>ruby --version</code> doesn&rsquo;t say you&rsquo;re using Ruby at least 1.9.3, revisit your rbenv or RVM installation.</p>
-
-<h2>Setup Octopress</h2>
-
-<pre><code>git clone git://github.com/imathis/octopress.git octopress
-cd octopress
-</code></pre>
-
-<p>Next, install dependencies.</p>
-
-<pre><code>gem install bundler
-rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
-bundle install
-</code></pre>
-
-<p>Install the default Octopress theme.</p>
-
-<pre><code>rake install
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/12/27/octopress-setup/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -268,6 +286,10 @@ $ rake deploy
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/12/27/configuring-octopress/">Configuring Octopress</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/27/octopress-setup/">Octopress Setup</a>
       </li>
     
@@ -276,35 +298,6 @@ $ rake deploy
       </li>
     
   </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/gerenbokedajian@cntv.cn">@gerenbokedajian@cntv.cn</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'gerenbokedajian@cntv.cn',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 
@@ -329,16 +322,6 @@ $ rake deploy
 
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
 
 
 
