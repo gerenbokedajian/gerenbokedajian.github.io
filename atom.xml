@@ -4,7 +4,7 @@
   <title><![CDATA[个人博客搭建]]></title>
   <link href="http://gerenbokedajian.github.io/atom.xml" rel="self"/>
   <link href="http://gerenbokedajian.github.io/"/>
-  <updated>2015-12-28T00:22:53+08:00</updated>
+  <updated>2015-12-28T00:34:26+08:00</updated>
   <id>http://gerenbokedajian.github.io/</id>
   <author>
     <name><![CDATA[个人博客]]></name>
@@ -149,6 +149,11 @@ bundle install
     <content type="html"><![CDATA[<h2>小引</h2>
 
 <p>Octopress是利用Jekyll博客引擎开发的一个博客系统，生成的静态页面能够很好的在github page上展现。号称是hacker专属的一个博客系统(A blogging framework for hackers.)</p>
+
+<!--more-->
+
+
+<p></p>
 
 <h2>1、安装Ruby</h2>
 
