@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[个人博客搭建]]></title>
+  <link href="http://gerenbokedajian.github.io/atom.xml" rel="self"/>
+  <link href="http://gerenbokedajian.github.io/"/>
+  <updated>2016-01-03T12:59:25+08:00</updated>
+  <id>http://gerenbokedajian.github.io/</id>
+  <author>
+    <name><![CDATA[个人博客]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress中的文件使用中文]]></title>
+    <link href="http://gerenbokedajian.github.io/blog/2016/01/03/Octopress%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87/index.html"/>
+    <updated>2016-01-03T12:43:15+08:00</updated>
+    <id>http://gerenbokedajian.github.io/blog/2016/01/03/Octopress%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87/Octopress中的文件使用中文</id>
+    <content type="html"><![CDATA[<h2>我不喜欢Octopress把我的文件转义成英文的格式：</h2>
+
+<pre><code>2015-12-27-li-yong-octopressda-da-jian-ge-ren-bo-ke.markdown
+</code></pre>
+
+<p>很明显我是看不懂上面这个文件的意义的，我需要的是中文</p>
+
+<h2>我希望创建文章的时候我可以直接指定文章的路径</h2>
+
+<pre><code>rake new_post["Octopress中的文件使用中文","octopress"]
+</code></pre>
+
+<h2>最后的代码如下：</h2>
+
+<pre><code># usage rake new_post[my-new-post] or rake new_post['my new post'] or rake new_post (defaults to "new-post")
+desc "Begin a new post in #{source_dir}/#{posts_dir}"
+task :new_post, [:title, :path] do |t, args|
+  if args[:path]
+      path = args[:path]
+  end
+  if args[:title]
+    title = args[:title]
+  else
+    title = get_stdin("Enter a title for your post: ")
+  end
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  mkdir_p "#{source_dir}/#{posts_dir}/#{path}/"
+  filename = "#{source_dir}/#{posts_dir}/#{path}/#{Time.now.strftime('%Y-%m-%d')}-#{title}.#{new_post_ext}"
+  if File.exist?(filename)
+    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+  end
+  puts "Creating new post: #{filename}"
+  open(filename, 'w') do |post|
+    post.puts "---"
+    post.puts "layout: post"
+    post.puts "title: \"#{title.gsub(/&amp;/,'&amp;amp;')}\""
+    post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
+    post.puts "comments: true"
+    post.puts "categories: "
+    post.puts "tags: "
+    post.puts "---"
+  end
+end
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging Basics]]></title>
+    <link href="http://gerenbokedajian.github.io/blog/2015/12/28/blogging-basics/index.html"/>
+    <updated>2015-12-28T00:41:17+08:00</updated>
+    <id>http://gerenbokedajian.github.io/blog/2015/12/28/blogging-basics/blogging-basics</id>
+    <content type="html"><![CDATA[<p>Octopress offers some rake tasks to create post and pages preloaded with metadata and according to Jekyll&rsquo;s naming conventions. It also generates a global and a category based feed for your posts (You can find them in <code>atom.xml</code> and <code>blog/categories/&lt;category&gt;/atom.xml</code>).</p>
+
+<p>If you are using zsh in the command line, then please add alias <code>rake=noglob rake</code> to your <code>zsh</code> config to prevent the <code>zsh</code>: no matches found error that occurs when running these rake tasks.</p>
+
+<!--more-->
+
+
+<p></p>
+
+<h2>Blog Posts</h2>
+
+<p>Blog posts must be stored in the <code>source/_posts</code> directory and named according to Jekyll&rsquo;s naming conventions: <code>YYYY-MM-DD-post-title.markdown</code>. The name of the file will be used as the url slug, and the date helps with file distinction and determines the sorting order for post loops.  <br/>
+Octopress provides a rake task to create new blog posts with the right naming conventions, with sensible yaml metadata.</p>
+
+<h3>Syntax</h3>
+
+<pre><code>rake new_post["title"]
+</code></pre>
+
+<p><code>new_post</code> expects a naturally written title and strips out undesirable url characters when creating the filename. The default file extension for new posts is <code>markdown</code> but you can configure that in the <code>Rakefile</code>.</p>
+
+<p>Note: some command line interpreters, e.g. <code>zsh</code>, have a special meaning for <code>[</code> and <code>]</code> so you have to escape them or temporary switch to bash.</p>
+
+<h3>Example</h3>
+
+<pre><code>rake new_post["Zombie Ninjas Attack: A survivor's retrospective"]
+# Creates source/_posts/2011-07-03-zombie-ninjas-attack-a-survivors-retrospective.markdown
+</code></pre>
+
+<p>The filename will determine your url. With the default permalink settings the url would be something like <code>http://site.com/blog/2011/07/03/zombie-ninjas-attack-a-survivors-retrospective/index.html</code>.</p>
+
+<p>Open a post in a text editor and you&rsquo;ll see a block of yaml front matter which tells Jekyll how to processes posts and pages.</p>
+
+<pre><code>---
+layout: post
+title: "Zombie Ninjas Attack: A survivor's retrospective"
+date: 2011-07-03 5:59
+comments: true
+external-url:
+categories:
+---
+</code></pre>
+
+<p>Here you can turn comments off or add categories to your post. If you are working on a multi-author blog, you can add author: Your Name to the metadata for proper attribution on a post. If you are working on a draft, you can add <code>published: false</code> to prevent it from being posted when you generate your blog. If you want to publish a linklog style post (blog entries point to external urls), simply add an <code>external-url</code> to your post.   <br/>
+You can add a single category or multiple categories like this.</p>
+
+<pre><code># One category
+categories: Sass
+
+# Multiple categories example 1
+categories: [CSS3, Sass, Media Queries]
+
+# Multiple categories example 2
+categories:
+- CSS3
+- Sass
+- Media Queries
+</code></pre>
+
+<h2>New Pages</h2>
+
+<p>You can add pages anywhere in your blog source directory and they&rsquo;ll be parsed by Jekyll. The URL will correspond directly to the filepath, so <code>about.markdown</code> will become <code>site.com/about.html</code>. If you prefer the URL <code>site.com/about/</code> you&rsquo;ll want to create the page as <code>about/index.markdown</code>. Octopress has a rake task for creating new pages easily.</p>
+
+<pre><code>rake new_page[super-awesome]
+# creates /source/super-awesome/index.markdown
+
+rake new_page[super-awesome/page.html]
+# creates /source/super-awesome/page.html
+</code></pre>
+
+<p>Like with the new post task, the default file extension is <code>markdown</code> but you can configure that in the <code>Rakefile</code>. A freshly generated page might look like this.</p>
+
+<pre><code>---
+layout: page
+title: "Super Awesome"
+date: 2011-07-03 5:59
+comments: true
+sharing: true
+footer: true
+---
+</code></pre>
+
+<p>The title is derived from the filename so you&rsquo;ll likely want to change that. This is very similar to the post yaml except it doesn&rsquo;t include categories, and you can toggle sharing and comments or remove the footer altogether. If you don&rsquo;t want to show a date on your page, just remove it from the yaml.</p>
+
+<h2>Content</h2>
+
+<p>The page and post content will be rendered by whichever markup engine you have specified in the site configuration file. Additionally, you can use any of the liquid template features that are described in the Jekyll docs. <br/>
+Inserting a <code>&lt;!-- more --&gt;</code> comment into your post will prevent the post content below this mark from being displayed on the index page for the blog posts, a &ldquo;<code>Continue →</code>&rdquo; button links to the full post.</p>
+
+<h2>Generate &amp; Preview</h2>
+
+<pre><code>rake generate   # Generates posts and pages into the public directory
+rake watch      # Watches source/ and sass/ for changes and regenerates
+rake preview    # Watches, and mounts a webserver at http://localhost:4000
+</code></pre>
+
+<p>If you want to work on posts without publishing them, you can add a published: <code>false</code> to your post&rsquo;s YAML header. You can preview these posts with <code>rake preview</code> on your local server, but they won&rsquo;t get published by rake generate.  <br/>
+Using the rake preview server is nice, but If you&rsquo;re a POW user, you can set up your Octopress site like this.</p>
+
+<pre><code>cd ~/.pow
+ln -s /path/to/octopress octopress
+cd -
+</code></pre>
+
+<p>Now that you&rsquo;re setup with POW, you&rsquo;ll just run rake watch and load up <code>http://octopress.dev</code> instead.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring Octopress]]></title>
+    <link href="http://gerenbokedajian.github.io/blog/2015/12/27/configuring-octopress/index.html"/>
+    <updated>2015-12-27T15:08:22+08:00</updated>
+    <id>http://gerenbokedajian.github.io/blog/2015/12/27/configuring-octopress/configuring-octopress</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve tried to keep configuring Octopress fairly simple and you&rsquo;ll probably only ever change the <code>Rakefile</code> and the <code>_config.yml</code>. Here&rsquo;s a list of files for configuring Octopress.</p>
+
+<pre><code>_config.yml       # Main config (Jekyll's settings)
+    Rakefile          # Configs for deployment
+    config.rb         # Compass config
+    config.ru         # Rack config
+</code></pre>
+
+<p>Configurations in the <code>Rakefile</code> are mostly related to deployment and you probably won&rsquo;t have to touch them unless you&rsquo;re using rsync.</p>
+
+<!--more-->
+
+
+<h2>Blog Configuration</h2>
+
+<p>In the <code>_config.yml</code> there are three sections for configuring your Octopress Blog. Spoiler: You must change <code>url</code>, and you&rsquo;ll probably change title, subtitle and author and enable some 3rd party services.</p>
+
+<h3>Main Configs</h3>
+
+<pre><code>url:                # For rewriting urls for RSS, etc
+title:              # Used in the header and title tags
+subtitle:           # A description used in the header
+author:             # Your name, for RSS, Copyright, Metadata
+simple_search:      # Search engine for simple site search
+description:        # A default meta description for your site
+date_format:        # Format dates using Ruby's date strftime syntax
+subscribe_rss:      # Url for your blog's feed, defauts to /atom.xml
+subscribe_email:    # Url to subscribe by email (service required)
+category_feeds:     # Enable per category RSS feeds (defaults to false in 2.1)
+email:              # Email address for the RSS feed if you want it.
+</code></pre>
+
+<p>Note: If your site is a multi-author blog, you may want to set this config&rsquo;s author to the name of your company or project, and add author metadata to posts and pages to give proper attribution for those works.</p>
+
+<h3>Jekyll &amp; Plugins</h3>
+
+<p>These configurations are used by Jekyll and Plugins. If you&rsquo;re not familiar with Jekyll, you should probably have a look at the configuration docs which lists more options that aren&rsquo;t covered here.</p>
+
+<pre><code>root:               # Mapping for relative urls (default: /)
+permalink:          # Permalink structure for blog posts
+source:             # Directory for site source files
+destination:        # Directory for generated site files
+plugins:            # Directory for Jekyll plugins
+code_dir:           # Directory for code snippets (for include_code plugin)
+category_dir:       # Directory for generated blog category pages
+
+pygments:           # Toggle python pygments syntax highlighting
+paginate:           # Posts per page on the blog index
+pagination_dir:     # Directory base for pagination URLs eg. /blog/page/2/
+recent_posts:       # Number of recent posts to appear in the sidebar
+
+default_asides:     # Configure what shows up in the sidebar and in what order
+blog_index_asides:  # Optional sidebar config for blog index page
+post_asides:        # Optional sidebar config for post layout
+page_asides:        # Optional sidebar config for page layout
+</code></pre>
+
+<p>If you want to change the way permalinks are written for your blog posts, see Jekyll&rsquo;s permalink docs.  <br/>
+Note: Jekyll has a baseurl config which offers mock subdirectory publishing support by adding a redirect to Jekyll&rsquo;s WEBrick server. Please don&rsquo;t use this. If you want to publish your site to a subdirectory, (see Deploying Octopress to a Subdirectory).</p>
+
+<h2>3rd Party Settings</h2>
+
+<p>These third party integrations are already set up for you. Simply fill in the configurations and they&rsquo;ll be added to your site.</p>
+
+<ul>
+<li>Github - List your github repositories in the sidebar</li>
+<li>Twitter - Add a button for sharing of posts and pages on Twitter</li>
+<li>Google Plus One - Setup sharing for posts and pages on Google&rsquo;s plus one network.</li>
+<li>Pinboard - Share your recent Pinboard bookmarks in the sidebar.</li>
+<li>Delicious - Share your recent Delicious bookmarks in the sidebar.</li>
+<li>Disqus Comments - Add your disqus short name to enable disqus comments on your site.</li>
+<li>Google Analytics - Add your tracking id to enable Google Analytics tracking for your site.</li>
+<li>Facebook - Add a Facebook like button</li>
+</ul>
+
+
+<p>The Octopress layouts read these configurations and only include the javascript and html necessary for the enabled services.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Setup]]></title>
+    <link href="http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup/index.html"/>
+    <updated>2015-12-27T14:48:40+08:00</updated>
+    <id>http://gerenbokedajian.github.io/blog/2015/12/27/octopress-setup/octopress-setup</id>
+    <content type="html"><![CDATA[<p>First, I want to stress that Octopress is a blogging framework for hackers. You should be comfortable running shell commands and familiar with the basics of Git. If that sounds daunting, Octopress probably isn&rsquo;t for you.</p>
+
+<!--more-->
+
+
+<p></p>
+
+<h2>Before You Begin</h2>
+
+<ul>
+<li>Install Git.</li>
+<li>Install Ruby 1.9.3 or greater using either rbenv or RVM.</li>
+<li>Install one of the ExecJS supported JavaScript runtimes.</li>
+</ul>
+
+
+<p>If <code>ruby --version</code> doesn&rsquo;t say you&rsquo;re using Ruby at least 1.9.3, revisit your rbenv or RVM installation.</p>
+
+<h2>Setup Octopress</h2>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress
+</code></pre>
+
+<p>Next, install dependencies.</p>
+
+<pre><code>gem install bundler
+rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+bundle install
+</code></pre>
+
+<p>Install the default Octopress theme.</p>
+
+<pre><code>rake install
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[利用Octopress搭建一个Github博客博客]]></title>
+    <link href="http://gerenbokedajian.github.io/blog/2015/12/27/li-yong-octopressda-da-jian-ge-ren-bo-ke/index.html"/>
+    <updated>2015-12-27T12:35:27+08:00</updated>
+    <id>http://gerenbokedajian.github.io/blog/2015/12/27/li-yong-octopressda-da-jian-ge-ren-bo-ke/li-yong-octopressda-da-jian-ge-ren-bo-ke</id>
+    <content type="html"><![CDATA[<h2>小引</h2>
+
+<p>Octopress是利用Jekyll博客引擎开发的一个博客系统，生成的静态页面能够很好的在github page上展现。号称是hacker专属的一个博客系统(A blogging framework for hackers.)</p>
+
+<!--more-->
+
+
+<p></p>
+
+<h2>1、安装Ruby</h2>
+
+<p>Octopress需要Ruby环境，RVM(Ruby Version Manager)负责安装和管理Ruby的环境。所以我们先在终端输入如下命令，来安装RVM：</p>
+
+<pre><code>curl -L https://get.rvm.io | bash -s stable --ruby  
+</code></pre>
+
+<p>接着是安装Ruby 1.9.3，在终端依次运行如下命令：</p>
+
+<pre><code>rvm install 1.9.3  
+rvm use 1.9.3  
+rvm rubygems latest  
+</code></pre>
+
+<p>完成上面的操作之后，运行<code>ruby --version</code>应该可以看到ruby 1.9.3环境已经安装好了。</p>
+
+<h2>2、安装Octopress</h2>
+
+<p>在安装Octopress之前，请确保你的电脑上已经安装有git了，在终端输入<code>git --version</code>，应该可以看到电脑中的git版本(我电脑上输出:<code>git version 1.7.12.4 (Apple Git-37)</code>)，如果没有显示相关内容，请先安装git。  <br/>
+git安装之后，利用git命令将octopress从github上clone到本机，如下命令：</p>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress  
+cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).  
+ruby --version  # Should report Ruby 1.9.3  
+</code></pre>
+
+<p>接着安装相关依赖项：</p>
+
+<pre><code>gem install bundler  
+rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command  
+bundle install  
+</code></pre>
+
+<p>最后安装默认的Octopress 主题。</p>
+
+<pre><code>rake install  
+</code></pre>
+
+<h2>3、配置Octopress</h2>
+
+<p>Octopress的作者已经尽量让配置简化了。大多数情况下只需要配置<code>_config.yml</code>和<code>Rakefile</code>文件即可。其中<code>Rakefile</code>是跟博客部署相关，一般情况下并不需要修改这个文件，除非使用了<code>rsync</code>。             <br/>
+<code>config.yml</code>是博客重要的一个配置文件，在<code>config.yml</code>文件中有三大配置项：<code>Main Configs</code>、<code>Jekyll &amp; Plugins</code>和<code>3rd Party Settings</code>。</p>
+
+<h2>4、将博客部署到GitHub上</h2>
+
+<p>Github的Page service可以免费托管博客，并且还可以自定义域名。                <br/>
+首先需要在GitHub上创建一个仓库，并将仓库名称按照这样的方式进行命名：<code>username.github.io</code>或<code>organization.github.io</code>。等后面配置完毕之后，我们就可以在浏览器中使用页面地址<code>http://username.github.io</code>来访问我们的博客。一般来说，我们希望在将博客的源码放到<code>source</code>分支下，并把生成的内容提交到master分支。 <br/>
+创建好仓库之后，我们需要利用octopress的一个配置rake任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在终端输入如下命令：</p>
+
+<pre><code>$ rake setup_github_pages  
+</code></pre>
+
+<p>上面的命令会做一些事情。其中最主要的就是创建一个<code>_deploy</code>目录，目录用来存放部署到<code>master</code>分支的内容。期间会要求你输入仓库的<code>url</code>，根据提示，进行输入即可。 <br/>
+完成上面的命令之后，我们就可以生成博客并真正的部署到仓库中了。执行如下命令：</p>
+
+<pre><code>rake generate  
+rake deploy  
+</code></pre>
+
+<p>上面的命令首先生成博客文件，并将生成的博客文件拷贝到<code>_deploy/</code>目录下，然后将这些内容添加到git中，并<code>commit</code>和<code>push</code>到仓库的<code>master</code>分支。 <br/>
+现在可以访问<code>http://username.github.io</code>了。注意：有时候可能会有延时，要等几分钟才能打开。  <br/>
+至此，我们的博客已经完成基本的部署，不过博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下。</p>
+
+<pre><code>$ git add .  
+$ git commit -m 'Initial source commit'  
+$ git push origin source  
+</code></pre>
+
+<p>如果在部署到仓库之前，需要先预览一下博客，可以在终端输入<code>rake preview</code>命令，然后就能在浏览器中进行本地预览访问了：<code>http://127.0.0.1:4000/</code>或<code>http://localhost:4000/</code>，效果跟仓库中的一样。</p>
+
+<h2>5、开始写博客</h2>
+
+<p>Octopress为我们提供了一些task来创建博文和页面。博文必须存储在<code>source/_posts</code>目录下，并且需要按照Jekyll的命名规范对文章进行命名：<code>YYYY-MM-DD-post-title.markdown</code>。文章的名字会被当做url的一部分，而其中的日期用于对博文的区分和排序。                <br/>
+通过Octopress提供的task可以正确的按照命名规范创建一个博文，并且在博文中会附带常用的一些yaml元数据。只需要在终端输入如下命令：</p>
+
+<pre><code>rake new_post["title"]  
+</code></pre>
+
+<p>其中<code>title</code>为博文的文件名，创建出来的文件默认是markdown格式。上面的命令会创建出这样一个文件：<code>source/_posts/2013-08-03-title.markdown</code>。打开这个文件，可以看到里面有如下一些内容了(告诉Jekyll博客引擎如何处理博文和页面)：</p>
+
+<pre><code>---  
+layout: post  
+title: "title"  
+date: 2013-08-03 16:36  
+comments: true  
+categories:   
+---  
+</code></pre>
+
+<p>接着我们就可以在这个文件中写我们的博文。完成之后，我们可以预览和部署博文。下面是创建并部署博文的一个完整过程：</p>
+
+<pre><code>$ rake new_post["New Post"]  
+$ rake generate  
+$ git add .  
+$ git commit -am "Some comment here."   
+$ git push origin source  
+$ rake deploy  
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

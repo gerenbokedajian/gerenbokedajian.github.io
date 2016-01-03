@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Blogging Basics - 个人博客搭建</title>
+  <meta name="author" content="个人博客">
+
+  
+  <meta name="description" content="Octopress offers some rake tasks to create post and pages preloaded with metadata and according to Jekyll&rsquo;s naming conventions. It also &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://gerenbokedajian.github.io/blog/2015/12/28/blogging-basics/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="个人博客搭建" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">个人博客搭建</a></h1>
+  
+    <h2>你的个人小天地</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="gerenbokedajian.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Blogging Basics</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-28T00:41:17+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:41 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Octopress offers some rake tasks to create post and pages preloaded with metadata and according to Jekyll&rsquo;s naming conventions. It also generates a global and a category based feed for your posts (You can find them in <code>atom.xml</code> and <code>blog/categories/&lt;category&gt;/atom.xml</code>).</p>
+
+<p>If you are using zsh in the command line, then please add alias <code>rake=noglob rake</code> to your <code>zsh</code> config to prevent the <code>zsh</code>: no matches found error that occurs when running these rake tasks.</p>
+
+<!--more-->
+
+
+<p></p>
+
+<h2>Blog Posts</h2>
+
+<p>Blog posts must be stored in the <code>source/_posts</code> directory and named according to Jekyll&rsquo;s naming conventions: <code>YYYY-MM-DD-post-title.markdown</code>. The name of the file will be used as the url slug, and the date helps with file distinction and determines the sorting order for post loops.  <br/>
+Octopress provides a rake task to create new blog posts with the right naming conventions, with sensible yaml metadata.</p>
+
+<h3>Syntax</h3>
+
+<pre><code>rake new_post["title"]
+</code></pre>
+
+<p><code>new_post</code> expects a naturally written title and strips out undesirable url characters when creating the filename. The default file extension for new posts is <code>markdown</code> but you can configure that in the <code>Rakefile</code>.</p>
+
+<p>Note: some command line interpreters, e.g. <code>zsh</code>, have a special meaning for <code>[</code> and <code>]</code> so you have to escape them or temporary switch to bash.</p>
+
+<h3>Example</h3>
+
+<pre><code>rake new_post["Zombie Ninjas Attack: A survivor's retrospective"]
+# Creates source/_posts/2011-07-03-zombie-ninjas-attack-a-survivors-retrospective.markdown
+</code></pre>
+
+<p>The filename will determine your url. With the default permalink settings the url would be something like <code>http://site.com/blog/2011/07/03/zombie-ninjas-attack-a-survivors-retrospective/index.html</code>.</p>
+
+<p>Open a post in a text editor and you&rsquo;ll see a block of yaml front matter which tells Jekyll how to processes posts and pages.</p>
+
+<pre><code>---
+layout: post
+title: "Zombie Ninjas Attack: A survivor's retrospective"
+date: 2011-07-03 5:59
+comments: true
+external-url:
+categories:
+---
+</code></pre>
+
+<p>Here you can turn comments off or add categories to your post. If you are working on a multi-author blog, you can add author: Your Name to the metadata for proper attribution on a post. If you are working on a draft, you can add <code>published: false</code> to prevent it from being posted when you generate your blog. If you want to publish a linklog style post (blog entries point to external urls), simply add an <code>external-url</code> to your post.   <br/>
+You can add a single category or multiple categories like this.</p>
+
+<pre><code># One category
+categories: Sass
+
+# Multiple categories example 1
+categories: [CSS3, Sass, Media Queries]
+
+# Multiple categories example 2
+categories:
+- CSS3
+- Sass
+- Media Queries
+</code></pre>
+
+<h2>New Pages</h2>
+
+<p>You can add pages anywhere in your blog source directory and they&rsquo;ll be parsed by Jekyll. The URL will correspond directly to the filepath, so <code>about.markdown</code> will become <code>site.com/about.html</code>. If you prefer the URL <code>site.com/about/</code> you&rsquo;ll want to create the page as <code>about/index.markdown</code>. Octopress has a rake task for creating new pages easily.</p>
+
+<pre><code>rake new_page[super-awesome]
+# creates /source/super-awesome/index.markdown
+
+rake new_page[super-awesome/page.html]
+# creates /source/super-awesome/page.html
+</code></pre>
+
+<p>Like with the new post task, the default file extension is <code>markdown</code> but you can configure that in the <code>Rakefile</code>. A freshly generated page might look like this.</p>
+
+<pre><code>---
+layout: page
+title: "Super Awesome"
+date: 2011-07-03 5:59
+comments: true
+sharing: true
+footer: true
+---
+</code></pre>
+
+<p>The title is derived from the filename so you&rsquo;ll likely want to change that. This is very similar to the post yaml except it doesn&rsquo;t include categories, and you can toggle sharing and comments or remove the footer altogether. If you don&rsquo;t want to show a date on your page, just remove it from the yaml.</p>
+
+<h2>Content</h2>
+
+<p>The page and post content will be rendered by whichever markup engine you have specified in the site configuration file. Additionally, you can use any of the liquid template features that are described in the Jekyll docs. <br/>
+Inserting a <code>&lt;!-- more --&gt;</code> comment into your post will prevent the post content below this mark from being displayed on the index page for the blog posts, a &ldquo;<code>Continue →</code>&rdquo; button links to the full post.</p>
+
+<h2>Generate &amp; Preview</h2>
+
+<pre><code>rake generate   # Generates posts and pages into the public directory
+rake watch      # Watches source/ and sass/ for changes and regenerates
+rake preview    # Watches, and mounts a webserver at http://localhost:4000
+</code></pre>
+
+<p>If you want to work on posts without publishing them, you can add a published: <code>false</code> to your post&rsquo;s YAML header. You can preview these posts with <code>rake preview</code> on your local server, but they won&rsquo;t get published by rake generate.  <br/>
+Using the rake preview server is nice, but If you&rsquo;re a POW user, you can set up your Octopress site like this.</p>
+
+<pre><code>cd ~/.pow
+ln -s /path/to/octopress octopress
+cd -
+</code></pre>
+
+<p>Now that you&rsquo;re setup with POW, you&rsquo;ll just run rake watch and load up <code>http://octopress.dev</code> instead.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">个人博客</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-12-28T00:41:17+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:41 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/12/27/configuring-octopress/index.html" title="Previous Post: Configuring Octopress">&laquo; Configuring Octopress</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2016/01/03/Octopress%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87/index.html" title="Next Post: Octopress中的文件使用中文">Octopress中的文件使用中文 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/03/Octopress%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87/index.html">Octopress中的文件使用中文</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/28/blogging-basics/index.html">Blogging Basics</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/27/configuring-octopress/index.html">Configuring Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/27/octopress-setup/index.html">Octopress Setup</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/12/27/li-yong-octopressda-da-jian-ge-ren-bo-ke/index.html">利用Octopress搭建一个Github博客博客</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - 个人博客 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
