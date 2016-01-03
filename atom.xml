@@ -4,7 +4,7 @@
   <title><![CDATA[个人博客搭建]]></title>
   <link href="http://gerenbokedajian.github.io/atom.xml" rel="self"/>
   <link href="http://gerenbokedajian.github.io/"/>
-  <updated>2016-01-03T12:59:25+08:00</updated>
+  <updated>2016-01-03T13:20:46+08:00</updated>
   <id>http://gerenbokedajian.github.io/</id>
   <author>
     <name><![CDATA[个人博客]]></name>
@@ -23,7 +23,11 @@
 <pre><code>2015-12-27-li-yong-octopressda-da-jian-ge-ren-bo-ke.markdown
 </code></pre>
 
-<p>很明显我是看不懂上面这个文件的意义的，我需要的是中文</p>
+<!--more-->
+
+
+<p>
+很明显我是看不懂上面这个文件的意义的，我需要的是中文</p>
 
 <h2>我希望创建文章的时候我可以直接指定文章的路径</h2>
 
